@@ -17,7 +17,6 @@ private:
     ORB_SLAM3::System *mpSLAM;
     std::string world_frame_id, cam_frame_id;
     Sophus::SE3f Twc;
-    // CAMERA::ImageGrabber *imgGrab;
     std::unique_ptr<CAMERA::ImageGrabber> imgGrab;
     rclcpp::TimerBase::SharedPtr timer_;
     geometry_msgs::msg::PoseStamped camera_pose_;
@@ -28,4 +27,5 @@ private:
     void timer_callback();
     void publish_pose();
     void T_camera_to_vehicle();
+    void get_parameters();
 };

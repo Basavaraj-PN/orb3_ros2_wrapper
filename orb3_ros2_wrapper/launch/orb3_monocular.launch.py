@@ -7,7 +7,7 @@ from launch.actions import DeclareLaunchArgument
 
 
 def generate_launch_description():
-    tutorial_pkg_dir = get_package_share_directory('orb3_wrapper')
+    tutorial_pkg_dir = get_package_share_directory('orb3_ros2_wrapper')
     voc_file_arg = DeclareLaunchArgument(
         'ORBvoc_file',
         default_value=os.path.join(
@@ -15,9 +15,9 @@ def generate_launch_description():
         description='Path to the ORB vocabulary file'
     )
     setting_file = DeclareLaunchArgument(
-        'realsense_d435i_file',
+        'camera_params_file',
         default_value=os.path.join(
-            tutorial_pkg_dir, 'config/realsense_d435i.yaml'),
+            tutorial_pkg_dir, 'config/camera_params.yaml'),
         description='Setting file'
     )
     enable_pangolin = DeclareLaunchArgument(
@@ -37,8 +37,8 @@ def generate_launch_description():
         name="mono_node",
         parameters=[
             {'ORBvoc_file': LaunchConfiguration("ORBvoc_file")},
-            {'realsense_d435i_file': LaunchConfiguration(
-                "realsense_d435i_file")},
+            {'camera_params_file': LaunchConfiguration(
+                "camera_params_file")},
             {'enable_pangolin': LaunchConfiguration('enable_pangolin')},
             {'image_topic': LaunchConfiguration('image_topic')}
         ],

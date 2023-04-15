@@ -8,17 +8,17 @@ from launch.actions import DeclareLaunchArgument
 
 def generate_launch_description():
     tutorial_pkg_dir = get_package_share_directory('orb3_ros2_wrapper')
-    voc_file_arg = DeclareLaunchArgument(
+    ORBvoc_file = DeclareLaunchArgument(
         'ORBvoc_file',
         default_value=os.path.join(
             tutorial_pkg_dir, 'config/ORBvoc.txt'),
         description='Path to the ORB vocabulary file'
     )
-    setting_file = DeclareLaunchArgument(
+    camera_params_file = DeclareLaunchArgument(
         'camera_params_file',
         default_value=os.path.join(
             tutorial_pkg_dir, 'config/camera_params.yaml'),
-        description='Setting file'
+        description='camera_params_file'
     )
     enable_pangolin = DeclareLaunchArgument(
         'enable_pangolin',
@@ -29,8 +29,21 @@ def generate_launch_description():
     image_topic = DeclareLaunchArgument(
         'image_topic',
         default_value='/carla/ego_vehicle/rgb_front/image',
-        description='Image topic'
+        description='Subscriber Image topic'
     )
+
+    parent_frame = DeclareLaunchArgument(
+        'parent_frame_id',
+        default_value='ego_vehicle/rgb_front',
+        description='world or parent frame_id'
+    )
+
+    child_frame = DeclareLaunchArgument(
+        'child_frame',
+        default_value='camera',
+        description='child frame_id'
+    )
+
     mono_node = Node(
         package="orb3_ros2_wrapper",
         executable="mono_node",
@@ -47,9 +60,11 @@ def generate_launch_description():
     )
 
     ld = LaunchDescription()
-    ld.add_action(voc_file_arg)
-    ld.add_action(setting_file)
+    ld.add_action(ORBvoc_file)
+    ld.add_action(camera_params_file)
     ld.add_action(enable_pangolin)
     ld.add_action(image_topic)
+    ld.add_action(parent_frame)
+    ld.add_action(child_frame)
     ld.add_action(mono_node)
     return ld

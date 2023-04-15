@@ -75,14 +75,16 @@ int main(int argc, char **argv)
   [0 0 1 0]
   [0 0 0 1]
 
-  you can set this to desired extrinsic values
-  
+  you can set this to desired extrinsic values by following
   Eigen::Matrix3f rotation;
   Eigen::Vector3f translation(x,y,z);
   Tcw.translation() = translation;;
-  Tcw.rotation = rotation;;
+  Tcw.rotation = rotation;
+
+  Tcc : camera transformation
+  Twc : camera in world frame(here it is body/vehicle it is attached to.)
 */
-  Sophus::SE3f Tcw = Sophus::SE3f(); // Identity matrix
+  Sophus::SE3f Tcw = Sophus::SE3f(); // Homogeneous Identity Matrix
   rclcpp::spin(std::make_shared<Monocular>("monocular_node", image_topic, Tcw, &SLAM));
   rclcpp::shutdown();
   return 0;

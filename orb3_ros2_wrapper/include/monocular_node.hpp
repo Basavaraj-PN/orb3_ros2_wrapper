@@ -17,12 +17,12 @@ private:
     ORB_SLAM3::System *mpSLAM;
     std::string world_frame_id, cam_frame_id;
     Sophus::SE3f Twc;
-    std::unique_ptr<CAMERA::ImageGrabber> imgGrab;
+    std::unique_ptr<CAMERA::ImageGrabber> imgGrab{nullptr};
     rclcpp::TimerBase::SharedPtr timer_;
     geometry_msgs::msg::PoseStamped camera_pose_;
 
-    std::shared_ptr<tf2_ros::Buffer> buffer_;
-    std::shared_ptr<tf2_ros::TransformListener> tf2_listener_;
+    std::shared_ptr<tf2_ros::Buffer> buffer_{nullptr};
+    std::shared_ptr<tf2_ros::TransformListener> tf2_listener_{nullptr};
 
     rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr image_subscriber_;
     rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr orb_pose_publisher_;

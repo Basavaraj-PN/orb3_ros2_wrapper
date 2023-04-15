@@ -4,13 +4,12 @@
 Monocular::Monocular(std::string node_name, std::string image_topic, Sophus::SE3f Tcw, ORB_SLAM3::System *pSLAM)
     : Node(node_name), image_topic(image_topic), Tcw(Tcw), mpSLAM(pSLAM)
 {
-    // Read camera and world frame IDs from ROS parameter server
 
     this->get_parameters();
     buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
     tf2_listener_ = std::make_shared<tf2_ros::TransformListener>(*buffer_);
-
     imgGrab = std::make_unique<CAMERA::ImageGrabber>(mpSLAM);
+
     image_subscriber_ = this->create_subscription<sensor_msgs::msg::Image>(
         image_topic, 10, [this](const sensor_msgs::msg::Image::SharedPtr image)
         { imgGrab->GrabImage(image); });
@@ -24,6 +23,7 @@ Monocular::Monocular(std::string node_name, std::string image_topic, Sophus::SE3
 
 void Monocular::get_parameters()
 {
+    // Read camera and world frame IDs from  parameter server
     this->declare_parameter<std::string>("camera_frame", "default/camera");
     this->declare_parameter<std::string>("parent_frame", "default/world");
     this->get_parameter("camera_frame", cam_frame_id);
@@ -31,9 +31,17 @@ void Monocular::get_parameters()
 }
 void Monocular::timer_callback()
 {
+    // Transform from camera to vehicle coordinate
     Twc = transform_camera_to_vehicle(imgGrab->Tcc, Tcw);
+
+    // publish pose, camera pose w.r.t vehicle
     publish_pose();
+
+    // Publish transformation between world_frame_id and cam_frame_id
     publish_ros_tf_transform(Twc, world_frame_id, cam_frame_id, imgGrab->header.stamp);
+
+    // calculate camera pose in map frame and publish
+    publish_transformed_pose();
 }
 
 void Monocular::publish_pose()
@@ -41,7 +49,6 @@ void Monocular::publish_pose()
     camera_pose_.header = imgGrab->header;
     publish_ros_camera_pose(Twc, camera_pose_);
     orb_pose_publisher_->publish(camera_pose_);
-    publish_transformed_pose();
 }
 
 void Monocular::publish_transformed_pose()

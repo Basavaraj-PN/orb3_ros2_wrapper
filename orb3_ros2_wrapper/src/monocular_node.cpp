@@ -28,7 +28,7 @@ void Monocular::timer_callback()
 {
     Twc = transform_camera_to_vehicle(imgGrab->Tcc0, Tc0w);
     publish_pose();
-    publish_ros_tf_transform(Twc, "ego_vehicle/rgb_front", "camera", imgGrab->header.stamp);
+    publish_ros_tf_transform(Twc, world_frame_id, cam_frame_id, imgGrab->header.stamp);
 }
 
 void Monocular::publish_pose()

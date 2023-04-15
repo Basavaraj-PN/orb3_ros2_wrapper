@@ -5,7 +5,6 @@ Monocular::Monocular(std::string node_name, std::string image_topic, Sophus::SE3
     : Node(node_name), image_topic(image_topic), Tc0w(Tc0w), mpSLAM(pSLAM)
 {
     imgGrab = std::make_unique<CAMERA::ImageGrabber>(mpSLAM);
-
     image_subscriber_ = this->create_subscription<sensor_msgs::msg::Image>(
         image_topic, 10, [this](const sensor_msgs::msg::Image::SharedPtr image)
         { imgGrab->GrabImage(image); });

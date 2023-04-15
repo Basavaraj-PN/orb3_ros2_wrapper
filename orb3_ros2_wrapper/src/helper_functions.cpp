@@ -11,9 +11,9 @@ timestamp_to_sec(const std_msgs::msg::Header &header)
 }
 
 Sophus::SE3f
-transform_camera_to_vehicle(Sophus::SE3f Tcc0_SE3f, Sophus::SE3f Tcw_SE3f)
+transform_camera_to_vehicle(Sophus::SE3f Tcc_SE3f, Sophus::SE3f Tcw_SE3f)
 {
-    return (Tcc0_SE3f * Tcw_SE3f).inverse();
+    return (Tcc_SE3f * Tcw_SE3f).inverse();
 }
 
 void publish_ros_camera_pose(Sophus::SE3f Twc_SE3f, geometry_msgs::msg::PoseStamped &pose_in)

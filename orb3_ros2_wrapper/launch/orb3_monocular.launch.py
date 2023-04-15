@@ -33,13 +33,13 @@ def generate_launch_description():
     )
 
     parent_frame = DeclareLaunchArgument(
-        'parent_frame_id',
+        'parent_frame',
         default_value='ego_vehicle/rgb_front',
         description='world or parent frame_id'
     )
 
-    child_frame = DeclareLaunchArgument(
-        'child_frame',
+    camera_frame = DeclareLaunchArgument(
+        'camera_frame',
         default_value='camera',
         description='child frame_id'
     )
@@ -53,7 +53,9 @@ def generate_launch_description():
             {'camera_params_file': LaunchConfiguration(
                 "camera_params_file")},
             {'enable_pangolin': LaunchConfiguration('enable_pangolin')},
-            {'image_topic': LaunchConfiguration('image_topic')}
+            {'image_topic': LaunchConfiguration('image_topic')},
+            {'parent_frame': LaunchConfiguration('parent_frame')},
+            {'camera_frame': LaunchConfiguration('camera_frame')},
         ],
         arguments=["--ros-args", "--log-level", "info"],
         output="screen",
@@ -65,6 +67,6 @@ def generate_launch_description():
     ld.add_action(enable_pangolin)
     ld.add_action(image_topic)
     ld.add_action(parent_frame)
-    ld.add_action(child_frame)
+    ld.add_action(camera_frame)
     ld.add_action(mono_node)
     return ld

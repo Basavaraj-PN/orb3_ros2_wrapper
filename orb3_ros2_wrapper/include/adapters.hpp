@@ -20,7 +20,7 @@ namespace CAMERA
         ImageGrabber(ORB_SLAM3::System *pSLAM) : mpSLAM(pSLAM) {}
         void GrabImage(const sensor_msgs::msg::Image::ConstSharedPtr &msg);
         ORB_SLAM3::System *mpSLAM;
-        Sophus::SE3f Tcc0;
+        Sophus::SE3f Tcc;
         std_msgs::msg::Header header;
     };
 

@@ -1,8 +1,8 @@
 #include "monocular_node.hpp"
 #include "helper_functions.hpp"
 
-Monocular::Monocular(std::string node_name, std::string image_topic, Sophus::SE3f Tc0w, ORB_SLAM3::System *pSLAM)
-    : Node(node_name), image_topic(image_topic), Tc0w(Tc0w), mpSLAM(pSLAM)
+Monocular::Monocular(std::string node_name, std::string image_topic, Sophus::SE3f Tcw, ORB_SLAM3::System *pSLAM)
+    : Node(node_name), image_topic(image_topic), Tcw(Tcw), mpSLAM(pSLAM)
 {
     // Read camera and world frame IDs from ROS parameter server
 
@@ -26,7 +26,7 @@ void Monocular::get_parameters()
 }
 void Monocular::timer_callback()
 {
-    Twc = transform_camera_to_vehicle(imgGrab->Tcc0, Tc0w);
+    Twc = transform_camera_to_vehicle(imgGrab->Tcc, Tcw);
     publish_pose();
     publish_ros_tf_transform(Twc, world_frame_id, cam_frame_id, imgGrab->header.stamp);
 }

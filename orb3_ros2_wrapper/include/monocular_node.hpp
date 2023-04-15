@@ -9,11 +9,11 @@ using namespace std::chrono_literals;
 class Monocular : public rclcpp::Node
 {
 public:
-    Monocular(std::string node_name, std::string image_topic, Sophus::SE3f Tc0w, ORB_SLAM3::System *pSLAM);
+    Monocular(std::string node_name, std::string image_topic, Sophus::SE3f Tcw, ORB_SLAM3::System *pSLAM);
 
 private:
     std::string image_topic;
-    Sophus::SE3f Tc0w;
+    Sophus::SE3f Tcw;
     ORB_SLAM3::System *mpSLAM;
     std::string world_frame_id, cam_frame_id;
     Sophus::SE3f Twc;

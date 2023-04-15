@@ -21,7 +21,7 @@ namespace CAMERA
             // RCLCPP_INFO(node->get_logger(), "cv_bridge exception: %s", e.what());
             return;
         }
-        Tcc0 = mpSLAM->TrackMonocular(cv_ptr->image, timestamp_to_sec(cv_ptr->header));
+        Tcc = mpSLAM->TrackMonocular(cv_ptr->image, timestamp_to_sec(cv_ptr->header));
     }
 
 } // CAMERA namespace

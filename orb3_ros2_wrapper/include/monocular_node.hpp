@@ -20,12 +20,17 @@ private:
     std::unique_ptr<CAMERA::ImageGrabber> imgGrab;
     rclcpp::TimerBase::SharedPtr timer_;
     geometry_msgs::msg::PoseStamped camera_pose_;
+
+    std::shared_ptr<tf2_ros::Buffer> buffer_;
+    std::shared_ptr<tf2_ros::TransformListener> tf2_listener_;
+
     rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr image_subscriber_;
     rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr orb_pose_publisher_;
-    rclcpp::Publisher<std_msgs::msg::String>::SharedPtr pose_publisher_;
+    rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr transformed_pose_publisher_;
 
     void timer_callback();
     void publish_pose();
     void T_camera_to_vehicle();
     void get_parameters();
+    void publish_transformed_pose();
 };

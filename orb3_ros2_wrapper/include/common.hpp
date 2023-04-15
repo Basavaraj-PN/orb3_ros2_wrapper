@@ -30,5 +30,6 @@
 #include <rclcpp/time.hpp>
 #include <sophus/se3.hpp>
 #include <tf2_ros/transform_broadcaster.h>
+#include <tf2/transform_datatypes.h>
 
 #endif

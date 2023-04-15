@@ -56,10 +56,10 @@ set(UNIFIED_LIBS
    ${Pangolin_LIBRARIES}
 )
 
-add_executable(mono_node src/mono_node.cpp 
-  src/mono.cpp 
-  include/mono.hpp 
-  include/adapters.hpp 
+add_executable(mono_node src/monocular_entry.cpp
+  src/monocular_node.cpp 
+  include/monocular_node.hpp
+  include/adapters.hpp
   src/adapters.cpp
   include/helper_functions.hpp
   src/helper_functions.cpp

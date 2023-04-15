@@ -9,7 +9,7 @@
 #include <opencv2/core/eigen.hpp>
 #include <opencv2/opencv.hpp>
 
-// ORB_SLAM3 libraries, Directory is defined in CMakeLists.txt: ${ORB_SLAM3_DIR}
+// ORB_SLAM3 libraries,
 #include "include/ImuTypes.h"
 #include "include/System.h"
 

@@ -17,8 +17,7 @@ void readParametersFromParameterServer()
   node->declare_parameter<bool>("enable_pangolin", true);
   node->declare_parameter<std::string>("image_topic", "/carla/ego_vehicle/rgb_front/image");
 
-  // Get parameter values from the parameter server
-
+  // Get parameter values : ORBvoc_file
   if (node->get_parameter("ORBvoc_file", ORBvoc_file))
   {
     RCLCPP_INFO(node->get_logger(), "Loaded ORBvoc_file: %s", ORBvoc_file.c_str());
@@ -29,6 +28,7 @@ void readParametersFromParameterServer()
     rclcpp::shutdown();
   }
 
+  // Get parameter values : camera_params_file
   if (node->get_parameter("camera_params_file", camera_params_file))
   {
     RCLCPP_INFO(node->get_logger(), "Loaded camera_params_file: %s", camera_params_file.c_str());
@@ -39,6 +39,7 @@ void readParametersFromParameterServer()
     rclcpp::shutdown();
   }
 
+  // Get parameter values : image_topic
   if (node->get_parameter("image_topic", image_topic))
   {
     RCLCPP_INFO(node->get_logger(), "image_topic: %s", image_topic.c_str());
@@ -49,6 +50,7 @@ void readParametersFromParameterServer()
     rclcpp::shutdown();
   }
 
+  // Get parameter values : enable_pangolin
   if (node->get_parameter("enable_pangolin", enable_pangolin))
   {
     RCLCPP_INFO(node->get_logger(), "Loaded enable_pangolin: %s", enable_pangolin ? "true" : "false");

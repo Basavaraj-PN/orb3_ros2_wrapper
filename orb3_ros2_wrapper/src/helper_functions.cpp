@@ -10,7 +10,8 @@ timestamp_to_sec(const std_msgs::msg::Header &header)
     return stamp_sec;
 }
 
-Sophus::SE3f transform_camera_to_vehicle(Sophus::SE3f Tcc0_SE3f, Sophus::SE3f Tc0w_SE3f)
+Sophus::SE3f
+transform_camera_to_vehicle(Sophus::SE3f Tcc0_SE3f, Sophus::SE3f Tc0w_SE3f)
 {
     return (Tcc0_SE3f * Tc0w_SE3f).inverse();
 }

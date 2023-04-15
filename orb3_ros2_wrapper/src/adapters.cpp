@@ -15,10 +15,7 @@ namespace CAMERA
         }
         catch (cv_bridge::Exception &e)
         {
-            // ROS_ERROR("cv_bridge exception: %s", e.what());
-            std::cout << e.what() << std::endl;
-
-            // RCLCPP_INFO(node->get_logger(), "cv_bridge exception: %s", e.what());
+            RCLCPP_ERROR(rclcpp::get_logger("logger"), "cv_bridge exception: %s", e.what());
             return;
         }
         Tcc = mpSLAM->TrackMonocular(cv_ptr->image, timestamp_to_sec(cv_ptr->header));

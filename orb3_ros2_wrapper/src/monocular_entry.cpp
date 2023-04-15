@@ -67,7 +67,23 @@ int main(int argc, char **argv)
 
   ORB_SLAM3::System::eSensor sensor_type = ORB_SLAM3::System::MONOCULAR;
   ORB_SLAM3::System SLAM(ORBvoc_file, camera_params_file, sensor_type, enable_pangolin);
-  rclcpp::spin(std::make_shared<Monocular>("monocular_node", image_topic, Sophus::SE3f(), &SLAM));
+
+  /*
+  Tcw: camera extrinsic matrix
+  [1 0 0 0]
+  [0 1 0 0]
+  [0 0 1 0]
+  [0 0 0 1]
+
+  you can set this to desired extrinsic values
+  
+  Eigen::Matrix3f rotation;
+  Eigen::Vector3f translation(x,y,z);
+  Tcw.translation() = translation;;
+  Tcw.rotation = rotation;;
+*/
+  Sophus::SE3f Tcw = Sophus::SE3f(); // Identity matrix
+  rclcpp::spin(std::make_shared<Monocular>("monocular_node", image_topic, Tcw, &SLAM));
   rclcpp::shutdown();
   return 0;
 }

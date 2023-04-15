@@ -3,7 +3,7 @@
 #include <memory>
 
 std::string ORBvoc_file;
-std::string realsense_d435i_file;
+std::string camera_params_file;
 std::string image_topic;
 bool enable_pangolin;
 
@@ -29,13 +29,13 @@ void readParametersFromParameterServer()
     rclcpp::shutdown();
   }
 
-  if (node->get_parameter("realsense_d435i_file", realsense_d435i_file))
+  if (node->get_parameter("camera_params_file", camera_params_file))
   {
-    RCLCPP_INFO(node->get_logger(), "Loaded realsense_d435i_file: %s", realsense_d435i_file.c_str());
+    RCLCPP_INFO(node->get_logger(), "Loaded camera_params_file: %s", camera_params_file.c_str());
   }
   else
   {
-    RCLCPP_ERROR(node->get_logger(), "Failed to get realsense_d435i_file parameter, using default value");
+    RCLCPP_ERROR(node->get_logger(), "Failed to get camera_params_file parameter, using default value");
     rclcpp::shutdown();
   }
 
@@ -66,7 +66,7 @@ int main(int argc, char **argv)
   readParametersFromParameterServer();
 
   ORB_SLAM3::System::eSensor sensor_type = ORB_SLAM3::System::MONOCULAR;
-  ORB_SLAM3::System SLAM(ORBvoc_file, realsense_d435i_file, sensor_type, enable_pangolin);
+  ORB_SLAM3::System SLAM(ORBvoc_file, camera_params_file, sensor_type, enable_pangolin);
   rclcpp::spin(std::make_shared<Monocular>("monocular_node", image_topic, Sophus::SE3f(), &SLAM));
   rclcpp::shutdown();
   return 0;

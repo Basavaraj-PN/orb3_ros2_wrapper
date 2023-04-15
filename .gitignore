@@ -11,3 +11,7 @@ CTestTestfile.cmake
 _deps
 
 ORBvoc.txt
+build
+devel
+install
+log

@@ -35,7 +35,7 @@ The `orb3_ros2_wrapper` package wraps the monocular node of ORB-SLAM3, a popular
 3. Build the package using colcon or a similar ROS2 build tool:
 
 ```bash
-colcon build --packages-select orb3_ros2_wrapper
+colcon build --packages-select orb3_ros2_wrapper --symlink-install
 ```
 
 ## Config Directory
@@ -49,9 +49,7 @@ Make sure that you have these files in the `config` directory of your `orb3_ros2
 
 ## Nodes
 
-`mono_node`: Executable from the orb3_ros2_wrapper package, which performs visual SLAM using ORB-SLAM3. It is launched with the specified parameters and arguments.
-
-Also node broadcast tf between  `parent_frame` `camera_frame`
+`mono_node`: Executable from the orb3_ros2_wrapper package, which performs visual SLAM using ORB-SLAM3. It is launched with the specified parameters and arguments. This node also broadcast tf between  `parent_frame` `camera_frame`
 
 ## Topics
 

@@ -3,7 +3,7 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
-from launch.actions import DeclareLaunchArgument, LogInfo
+from launch.actions import DeclareLaunchArgument
 
 
 def generate_launch_description():
@@ -77,3 +77,7 @@ def generate_launch_description():
     ld.add_action(camera_frame)
     ld.add_action(mono_node)
     return ld
+
+
+if __name__ == '__main__':
+    generate_launch_description()

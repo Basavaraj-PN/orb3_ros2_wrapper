@@ -3,7 +3,7 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
-from launch.actions import DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument, LogInfo
 
 
 def generate_launch_description():
@@ -49,7 +49,7 @@ def generate_launch_description():
         executable="mono_node",
         name="mono_node",
         parameters=[
-            {'ORBvoc_file': LaunchConfiguration("ORBvoc_file")},
+            {'ORBvoc_file': LaunchConfiguration('ORBvoc_file')},
             {'camera_params_file': LaunchConfiguration(
                 "camera_params_file")},
             {'enable_pangolin': LaunchConfiguration('enable_pangolin')},
@@ -57,9 +57,16 @@ def generate_launch_description():
             {'parent_frame': LaunchConfiguration('parent_frame')},
             {'camera_frame': LaunchConfiguration('camera_frame')},
         ],
+        remappings=[
+            # Map the topic name to the launch argument
+            ('image_topic', LaunchConfiguration('image_topic'))
+        ],
         arguments=["--ros-args", "--log-level", "info"],
         output="screen",
     )
+    # print_image_topic_name = LogInfo(
+    #     msg=LaunchConfiguration('image_topic_name')
+    # )
 
     ld = LaunchDescription()
     ld.add_action(ORBvoc_file)

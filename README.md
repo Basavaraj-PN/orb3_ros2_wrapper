@@ -85,6 +85,23 @@ The following launch arguments can be passed to the `orb3_ros2_wrapper.launch.py
 
 You can modify these launch arguments to suit your specific setup.
 
-## Additional Information
+## Demo with CARLA Simulator
+
+1. Build and install carla ros2 bridge, refer to the [ROS bridge installation for ROS2](https://carla.readthedocs.io/projects/ros-bridge/en/latest/ros_installation_ros2)
+2. Run carla ros2 bridge with example:
+
+    ```bash
+    ros2 launch carla_ros_bridge carla_ros_bridge_with_example_ego_vehicle.launch.py town:=Town03
+    ```
+
+3. Run `mono_node` from launch file
+
+    ```bash
+    ros2 launch orb3_ros2_wrapper orb3_monocular.launch.py image_topic:=/carla/ego_vehicle/rgb_front/image
+    ```
+
+4. `ros2 topic list | grep orb` , and you can use plotjuggler to plot `/carla/ego_vehicle/odometry` and `/orb3/camera/transformed/pose`
+
+![Image Alt Text](src/orb3_ros2_wrapper/resources/screenshots/demo.png)
 
 For more information on how to use ORB3 ROS2 Wrapper, refer to the [ORB3 ROS2 Wrapper GitHub repository](https://github.com/Basavaraj-PN/orb3_ros2_wrapper).

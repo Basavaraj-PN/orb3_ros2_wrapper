@@ -72,6 +72,6 @@ void Monocular::publish_transformed_pose()
     }
     catch (tf2::TransformException &ex)
     {
-        RCLCPP_ERROR(get_logger(), "Failed to transform pose: %s", ex.what());
+        RCLCPP_WARN(get_logger(), "Failed to transform pose: %s", ex.what());
     }
 }

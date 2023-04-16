@@ -15,7 +15,7 @@ Monocular::Monocular(std::string node_name, std::string image_topic, Sophus::SE3
         { imgGrab->GrabImage(image); });
 
     orb_pose_publisher_ = this->create_publisher<geometry_msgs::msg::PoseStamped>("orb3/camera/pose", 20);
-    transformed_pose_publisher_ = this->create_publisher<geometry_msgs::msg::PoseStamped>("orb3/transformed/pose", 20);
+    transformed_pose_publisher_ = this->create_publisher<geometry_msgs::msg::PoseStamped>("orb3/camera/transformed/pose", 20);
 
     timer_ = this->create_wall_timer(
         33.33ms, std::bind(&Monocular::timer_callback, this));

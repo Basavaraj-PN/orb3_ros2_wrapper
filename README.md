@@ -102,6 +102,6 @@ You can modify these launch arguments to suit your specific setup.
 
 4. `ros2 topic list | grep orb` , and you can use plotjuggler to plot `/carla/ego_vehicle/odometry` and `/orb3/camera/transformed/pose`
 
-![Image Alt Text](src/orb3_ros2_wrapper/resources/screenshots/demo.png)
+![alt text](https://github.com/Basavaraj-PN/orb3_ros2_wrapper/blob/main/resources/screenshots/demo.png)
 
 For more information on how to use ORB3 ROS2 Wrapper, refer to the [ORB3 ROS2 Wrapper GitHub repository](https://github.com/Basavaraj-PN/orb3_ros2_wrapper).

@@ -27,6 +27,7 @@ find_package(geometry_msgs REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
+find_package(tf2_geometry_msgs REQUIRED)
 
 
 find_package(OpenCV REQUIRED)
@@ -69,7 +70,17 @@ target_include_directories(mono_node PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
 
-ament_target_dependencies(mono_node rclcpp std_msgs sensor_msgs tf2 tf2_ros OpenCV cv_bridge)
+ament_target_dependencies(
+  mono_node 
+  rclcpp 
+  std_msgs 
+  sensor_msgs 
+  tf2 
+  tf2_ros 
+  OpenCV 
+  cv_bridge
+  tf2_geometry_msgs
+)
 target_link_libraries(mono_node ${UNIFIED_LIBS})
 
 install(TARGETS mono_node

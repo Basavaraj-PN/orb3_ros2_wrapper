@@ -51,9 +51,13 @@ Make sure that you have these files in the `config` directory of your `orb3_ros2
 
 `mono_node`: Executable from the orb3_ros2_wrapper package, which performs visual SLAM using ORB-SLAM3. It is launched with the specified parameters and arguments.
 
+Also node broadcast tf between  `parent_frame` `camera_frame`
+
 ## Topics
 
 `image_topic`: The input image topic to subscribe to for visual data.
+`orb3/camera/pose` :  output topic, camera pose in after transforming with extrinsic parameter
+`orb3/camera/transformed/pose` :  output topic, transformed camera pose in map frame
 
 ## Parameters
 

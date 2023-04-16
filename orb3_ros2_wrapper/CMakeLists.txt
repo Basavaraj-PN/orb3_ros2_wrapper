@@ -30,11 +30,11 @@ find_package(tf2_ros REQUIRED)
 
 
 find_package(OpenCV REQUIRED)
-MESSAGE("OPENCV VERSION:")
+MESSAGE("OpencvFound: ")
 MESSAGE(${OpenCV_VERSION})
 
 find_package(Eigen3 REQUIRED)
-MESSAGE("Eigen3 VERSION:")
+MESSAGE("Eigen3Found: ")
 MESSAGE(${Eigen3_VERSION})
 
 find_package(Pangolin REQUIRED)
@@ -55,14 +55,15 @@ set(UNIFIED_LIBS
    ${Pangolin_LIBRARIES}
 )
 
-add_executable(mono_node src/monocular_entry.cpp
+add_executable(
+  mono_node 
+  src/monocular_entry.cpp
   src/monocular_node.cpp 
   include/monocular_node.hpp
   include/adapters.hpp
   src/adapters.cpp
   include/helper_functions.hpp
   src/helper_functions.cpp
-
 )
 target_include_directories(mono_node PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

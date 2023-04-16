@@ -3,7 +3,7 @@
 <package format="3">
   <name>orb3_ros2_wrapper</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>ros2 warapper for orb3 slam</description>
   <maintainer email="bnarasapur@gmail.com">omnipotent</maintainer>
   <license>TODO: License declaration</license>
 

@@ -34,7 +34,7 @@ Sophus::SE3f transform_camera_to_vehicle(Sophus::SE3f Tcc_SE3f, Sophus::SE3f Tcw
  * @param Twc_SE3f The camera-to-world transformation.
  * @param pose_in The ROS camera pose message to be updated.
  */
-void publish_ros_camera_pose(Sophus::SE3f Twc_SE3f, geometry_msgs::msg::PoseStamped &pose_in);
+void SE3f_to_geometry_msg_stamped(Sophus::SE3f Twc_SE3f, geometry_msgs::msg::PoseStamped &pose_in);
 
 /**
  * \brief Publish ROS tf2 transform.

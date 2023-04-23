@@ -66,7 +66,7 @@ add_executable(
   include/helper_functions.hpp
   src/helper_functions.cpp
 )
-add_executable(camera_transform src/camera_transform.cpp)
+add_executable(camera_transform src/camera_transform_publisher.cpp)
 
 target_include_directories(mono_node PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

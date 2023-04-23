@@ -15,8 +15,6 @@ Monocular::Monocular(std::string node_name, std::string image_topic, Sophus::SE3
         { imgGrab->GrabImage(image); });
 
     orb_pose_publisher_ = this->create_publisher<geometry_msgs::msg::PoseStamped>("orb3/camera/pose", 20);
-    transformed_pose_publisher_ = this->create_publisher<geometry_msgs::msg::PoseStamped>("orb3/camera/transformed/pose", 20);
-
     timer_ = this->create_wall_timer(
         33.33ms, std::bind(&Monocular::timer_callback, this));
 }
@@ -39,39 +37,12 @@ void Monocular::timer_callback()
 
     // Publish transformation between world_frame_id and cam_frame_id
     publish_ros_tf_transform(Twc, world_frame_id, cam_frame_id, imgGrab->header.stamp);
-
-    // calculate camera pose in map frame and publish
-    publish_transformed_pose();
 }
 
 void Monocular::publish_pose()
 {
     camera_pose_.header = imgGrab->header;
-    publish_ros_camera_pose(Twc, camera_pose_);
+    // convert camera pose to geometry pose
+    SE3f_to_geometry_msg_stamped(Twc, camera_pose_);
     orb_pose_publisher_->publish(camera_pose_);
-}
-
-void Monocular::publish_transformed_pose()
-{
-    try
-    {
-        // Look up the transform from "map" to "camera" at the latest time available
-        geometry_msgs::msg::TransformStamped transform = buffer_->lookupTransform("map", "camera", tf2::TimePointZero);
-
-        // Create a pose stamped message in "map" frame
-        geometry_msgs::msg::PoseStamped pose;
-        pose.header.stamp = transform.header.stamp;
-        pose.header.frame_id = "map";
-        pose.pose.position.x = transform.transform.translation.x;
-        pose.pose.position.y = transform.transform.translation.y;
-        pose.pose.position.z = transform.transform.translation.z;
-        pose.pose.orientation = transform.transform.rotation;
-
-        // Publish the transformed pose
-        transformed_pose_publisher_->publish(pose);
-    }
-    catch (tf2::TransformException &ex)
-    {
-        RCLCPP_WARN(get_logger(), "Failed to transform pose: %s", ex.what());
-    }
 }

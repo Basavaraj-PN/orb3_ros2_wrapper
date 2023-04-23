@@ -35,7 +35,6 @@ private:
     rclcpp::TimerBase::SharedPtr timer_;
     rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr image_subscriber_;
     rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr orb_pose_publisher_;
-    rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr transformed_pose_publisher_;
 
     /**
      * @brief Timer callback function for publishing pose, tf, and transformed pose.
@@ -54,8 +53,4 @@ private:
      * @brief Gets the camera and world frame IDs from the ROS2 parameter server.
      */
     void get_parameters();
-    /**
-     * \brief Publish transformed camera pose.
-     */
-    void publish_transformed_pose();
 };

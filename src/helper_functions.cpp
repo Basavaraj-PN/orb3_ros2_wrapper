@@ -16,7 +16,7 @@ transform_camera_to_vehicle(Sophus::SE3f Tcc_SE3f, Sophus::SE3f Tcw_SE3f)
     return (Tcc_SE3f * Tcw_SE3f).inverse();
 }
 
-void publish_ros_camera_pose(Sophus::SE3f Twc_SE3f, geometry_msgs::msg::PoseStamped &pose_in)
+void SE3f_to_geometry_msg_stamped(Sophus::SE3f Twc_SE3f, geometry_msgs::msg::PoseStamped &pose_in)
 {
     pose_in.pose.position.x = Twc_SE3f.translation().x();
     pose_in.pose.position.y = Twc_SE3f.translation().y();

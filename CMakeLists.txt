@@ -66,9 +66,16 @@ add_executable(
   include/helper_functions.hpp
   src/helper_functions.cpp
 )
+add_executable(camera_transform src/camera_transform.cpp)
+
 target_include_directories(mono_node PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
+
+target_include_directories(camera_transform PUBLIC
+$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+$<INSTALL_INTERFACE:include>)
+
 
 ament_target_dependencies(
   mono_node 
@@ -81,9 +88,22 @@ ament_target_dependencies(
   cv_bridge
   tf2_geometry_msgs
 )
+
+ament_target_dependencies(
+  camera_transform 
+  rclcpp  
+  sensor_msgs 
+  tf2 
+  tf2_ros  
+  tf2_geometry_msgs
+)
 target_link_libraries(mono_node ${UNIFIED_LIBS})
+target_link_libraries(camera_transform ${UNIFIED_LIBS})
 
 install(TARGETS mono_node
+  DESTINATION lib/${PROJECT_NAME})
+
+install(TARGETS camera_transform
   DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY

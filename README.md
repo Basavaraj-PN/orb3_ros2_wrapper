@@ -55,7 +55,6 @@ Make sure that you have these files in the `config` directory of your `orb3_ros2
 
 `image_topic`: The input image topic to subscribe to for visual data.
 `orb3/camera/pose` :  output topic, camera pose in after transforming with extrinsic parameter
-`orb3/camera/transformed/pose` :  output topic, transformed camera pose in map frame
 
 ## Parameters
 
@@ -100,7 +99,9 @@ You can modify these launch arguments to suit your specific setup.
     ros2 launch orb3_ros2_wrapper orb3_monocular.launch.py image_topic:=/carla/ego_vehicle/rgb_front/image
     ```
 
-4. `ros2 topic list | grep orb` , and you can use plotjuggler to plot `/carla/ego_vehicle/odometry` and `/orb3/camera/transformed/pose`
+4. you need transform `/orb3/camera/pose` to desired frame say `map` frame and publish it on topic say ```/orb3/camera/transformed/pose```
+
+5. `ros2 topic list | grep orb` , and you can use plotjuggler to plot `/carla/ego_vehicle/odometry` and `/orb3/camera/transformed/pose`
 
 ![alt text](https://github.com/Basavaraj-PN/orb3_ros2_wrapper/blob/main/resources/screenshots/demo.png)
 
